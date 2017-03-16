@@ -18,10 +18,15 @@ const router = new VueRouter({
             component: require('./components/settings/SettingsWrapper.vue'),
             children: [
                 {
+                    path: 'personal',
+                    name: 'settings-personal',
+                    component: require('./components/settings/Personal.vue')
+                },
+                {
                     path: 'security',
                     name: 'settings-security',
                     component: require('./components/settings/Security.vue')
-                },
+                }
             ]
         }
     ]

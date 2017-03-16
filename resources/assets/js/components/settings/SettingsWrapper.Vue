@@ -8,12 +8,13 @@
                     </div>
                     <div class="panel-body">
                         <div class="spark-settings-tabs">
-                            <ul role="tablist" class="nav spark-settings-stacked-tabs">
-                                <li class="active">
-                                    <a href="#">
-                                        <i class="fa fa-fw fa-btn fa-lock"></i>Security
-                                    </a>
-                                </li>
+                            <ul class="nav spark-settings-stacked-tabs">
+                                <router-link tag="li" :to="{ name: 'settings-personal' }">
+                                    <a><i class="fa fa-fw fa-btn fa-user"></i> Personal</a>
+                                </router-link>
+                                <router-link tag="li" :to="{ name: 'settings-security' }">
+                                    <a><i class="fa fa-fw fa-btn fa-lock"></i> Security</a>
+                                </router-link>
                             </ul>
                         </div>
                     </div>

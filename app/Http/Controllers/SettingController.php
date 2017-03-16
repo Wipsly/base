@@ -9,9 +9,7 @@ use App\Http\Controllers\Controller;
 
 class SettingController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     */
+   // Create new Controller Instance
     public function __construct()
     {
         $this->middleware('auth');
@@ -35,7 +33,7 @@ class SettingController extends Controller
     public function updateUserSecurity(Request $request)
     {
         $this->validate($request, [
-            'password' => 'required|min:6'
+            'password' => 'required|min:6|confirmed'
         ]);
 
         $user = User::findOrFail(Auth::user());

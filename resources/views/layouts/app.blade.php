@@ -19,6 +19,10 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
+    <!-- Pace -->
+    <script src="{{ asset('js/vendor/pace.min.js') }}"></script>
+
 </head>
 <body>
     <div id="app">

@@ -2,9 +2,12 @@
     <div class="panel panel-default">
         <div class="panel-heading">Security</div>
         <div class="panel-body">
-            <form @submit.prevent="changePassword" class="form-horizontal">
-                <alert-success :form="form" message="Your password has been updated."></alert-success>
+            <!-- Form -->
+            <form @submit.prevent="updateUserSecurity" @keydown="form.errors.clear($event.target.name)" class="form-horizontal">
+                <!-- Alerts -->
+                <alert-success :form="form" message="Your security settings have been updated."></alert-success>
                 <alert-error :form="form"></alert-error>
+                <!-- Password -->
                 <div class="form-group" :class="{ 'has-error': form.errors.has('password') }">
                     <label for="password" class="col-md-2 control-label">Password</label>
                     <div class="col-md-8">
@@ -12,6 +15,14 @@
                         <has-error :form="form" field="password"></has-error>
                     </div>
                 </div>
+                <!-- Password Confirmation -->
+                <div class="form-group" :class="{ 'has-error': form.errors.has('password') }">
+                    <label for="password" class="col-md-2 control-label">Confirm Password</label>
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" id="password_confirmation" v-model="form.password_confirmation">
+                    </div>
+                </div>
+                <!-- Submit -->
                 <div class="form-group">                                    
                     <div class="col-md-10 col-md-offset-2">
                         <button :disabled="form.busy" type="submit" class="btn btn-primary">
@@ -31,12 +42,13 @@
         data() {
             return {
                 form: new Form({
-                    password: null
+                    password: null,
+                    password_confirmation: null
                 })
             }
         },
         methods: {
-            changePassword() {
+            updateUserSecurity() {
                 this.form.post('/api/updateUserSecurity')
                         .then(response => console.log(response.data));
             }
