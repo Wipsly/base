@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <security></security>
+    <app-nav></app-nav>
+    <router-view>
 @endsection
 
 

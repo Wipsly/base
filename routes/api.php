@@ -17,6 +17,4 @@ Route::middleware('auth:api')->post('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/changePassword', function () {
-    return 'Working!';
-});
+Route::post('/updateUserSecurity', 'SettingController@updateUserSecurity')->middleware('auth:api');
