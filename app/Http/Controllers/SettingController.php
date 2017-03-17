@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -18,14 +19,19 @@ class SettingController extends Controller
     // Update User Personal
     public function updateUserPersonal(Request $request)
     {
+        $user = Auth::user();
+
         $this->validate($request, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users,' . Auth::user()->id
+            'email' => [
+                'required',
+                'max:255',
+                Rule::unique('users')->ignore($user->id),
+            ],
         ]);
 
-        $user = User::findOrFail(Auth::user());
         $user->name = $request->input('name');
-        $user->name = $request->input('email');
+        $user->email = $request->input('email');
         $user->save();
 
         return $user;
