@@ -8,13 +8,19 @@ import {
   AlertError,
   AlertErrors, 
   AlertSuccess
-} from 'vform'
+} from 'vform';
+
+import {
+    ClientTable
+} from 'vue-tables-2';
+
+Vue.use(ClientTable);
 
 // Initializing Components
-Vue.component(HasError.name, HasError)
-Vue.component(AlertError.name, AlertError)
-Vue.component(AlertErrors.name, AlertErrors)
-Vue.component(AlertSuccess.name, AlertSuccess)
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
+Vue.component(AlertErrors.name, AlertErrors);
+Vue.component(AlertSuccess.name, AlertSuccess);
 
 Vue.component('app-nav', require('./layouts/AppNav.vue'));
 

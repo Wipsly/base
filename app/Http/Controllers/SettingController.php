@@ -44,7 +44,7 @@ class SettingController extends Controller
             'password' => 'required|min:6|confirmed'
         ]);
 
-        $user = User::findOrFail(Auth::user());
+        $user = Auth::user();
         $user->password = bcrypt($request->input('password'));
         $user->save();
 

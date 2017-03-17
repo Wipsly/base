@@ -13,6 +13,23 @@ const router = new VueRouter({
             component: require('./components/dashboard/DashboardWrapper.vue')
         },
         {
+            path: '/users',
+            name: 'users',
+            component: require('./components/users/UsersWrapper.vue'),
+            children: [
+                {
+                    path: 'overview',
+                    name: 'users-index',
+                    component: require('./components/users/UsersIndex.vue')
+                },
+                {
+                    path: 'create',
+                    name: 'users-create',
+                    component: require('./components/users/UsersCreate.vue')
+                }
+            ]
+        },
+        {
             path: '/settings',
             name: 'settings',
             component: require('./components/settings/SettingsWrapper.vue'),

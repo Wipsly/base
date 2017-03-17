@@ -37,7 +37,6 @@ window.axios.defaults.headers.common = {
  */
 
 import { Form } from 'vform'
-
 window.Form = Form
 
 /**

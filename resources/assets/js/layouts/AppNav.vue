@@ -22,7 +22,10 @@
                 <ul class="nav navbar-nav">
                     <router-link tag="li" :to="{ name: 'dashboard' }">
                         <a><i class="fa fa-fw fa-btn fa-dashboard"></i> Dashboard</a>
-                    </router-link>&nbsp;
+                    </router-link>
+                    <router-link tag="li" :to="{ name: 'users-index' }">
+                        <a><i class="fa fa-fw fa-btn fa-users"></i> Users</a>
+                    </router-link>
                 </ul>
 
                 <div class="col-sm-3 col-md-3">

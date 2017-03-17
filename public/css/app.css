@@ -9388,6 +9388,13 @@ fieldset[disabled] .btn-danger-outline.active {
 .panel-flush .panel-header {
   padding: 0;
 }
+.VueTables label {
+  padding-right: 10px;
+  font-weight: 300;
+}
+.VuePagination {
+  text-align: center;
+}
 .table-borderless > thead > tr > th {
   border-bottom: 0;
 }

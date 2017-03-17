@@ -17,4 +17,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Settings
     Route::post('/updateUserPersonal', 'SettingController@updateUserPersonal');
     Route::post('/updateUserSecurity', 'SettingController@updateUserSecurity');
+    // Users
+    Route::get('/getAllUsers', 'UserController@getAllUsers');
+    Route::post('/createUser', 'UserController@createUser');
 });
