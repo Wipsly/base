@@ -45,7 +45,7 @@
                         </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <router-link :to="{ name: 'settings-security' }">
+                                    <router-link :to="{ name: 'settings-personal' }">
                                         <i class="fa fa-fw fa-btn fa-cogs"></i> Settings
                                     </router-link>
                                 </li>
@@ -60,14 +60,3 @@
             </div>
         </nav>
 </template>
-
-<script>
-    // When your page loads
-    $(function(){
-        // When the toggle areas in your navbar are clicked, toggle them
-        $("#search-button, #search-icon").click(function(e){
-            e.preventDefault();
-            $("#search-button, #search-form").toggle();
-        });
-    })
-</script>

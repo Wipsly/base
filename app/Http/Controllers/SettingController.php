@@ -19,11 +19,13 @@ class SettingController extends Controller
     public function updateUserPersonal(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users,' . Auth::user()->id
         ]);
 
         $user = User::findOrFail(Auth::user());
         $user->name = $request->input('name');
+        $user->name = $request->input('email');
         $user->save();
 
         return $user;
