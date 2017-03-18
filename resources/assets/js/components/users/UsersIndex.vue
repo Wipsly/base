@@ -3,7 +3,7 @@
         <div class="panel-heading">Overview</div>
         <div class="panel-body">
             <div id="users">
-                <v-client-table :data="users" :columns="columns" v-if="loaded"></v-client-table>
+                <v-client-table :data="users" :columns="columns" :options="options" v-if="loaded"></v-client-table>
             </div>
         </div>
     </div>
@@ -15,7 +15,15 @@
             return {
                 loaded: false,
                 users: null,
-                columns: ['name', 'email']
+                columns: ['name', 'email'],
+                options: {
+                    highlightMatches: true,
+                    texts: {
+                        filter: 'Filter',
+                        filterPlaceholder: 'Search',
+                        limit: 'Records'
+                    }
+                }
             }
         },
         mounted() {
