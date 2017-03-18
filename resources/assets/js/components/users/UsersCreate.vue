@@ -2,13 +2,25 @@
     <div class="panel panel-default">
         <div class="panel-heading">Create User</div>
         <div class="panel-body">
+            <!-- Modal -->
+            <modal ref="theModal">
+                <div slot="title">
+                    Your title here
+                </div>
+                <div slot="body">
+                    Your body here
+                </div>
+                <div slot="footer">
+                    <div class="btn btn-primary" @click="yes">Yes</div>
+                </div>
+            </modal>
             <!-- Notice -->
             <div class="alert alert-dismissible alert-info" v-if="notice">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
             </div>
             <!-- Form -->
-            <form @submit.prevent="createUser" @keydown="form.errors.clear($event.target.name)" class="form-horizontal">
+            <form @submit.prevent="openTheModal" @keydown="form.errors.clear($event.target.name)" class="form-horizontal">
                 <!-- Alerts -->
                 <alert-success :form="form" :message="message + ' has been created.'"></alert-success>
                 <alert-error :form="form"></alert-error>
@@ -44,6 +56,7 @@
 </template>
 
 <script>
+    import modal from 'vue2-bootstrap-modal'
     export default {
         data() {
             return {
@@ -64,7 +77,24 @@
                             this.form.reset()
                             this.notice = false
                         });
+            },
+            openTheModal() {
+                this.$refs.theModal.open()
+            },
+            yes () {
+                console.log('clicked yes')
+                this.form.post('/api/createUser')
+                        .then(response => {
+                            console.log(response.data)
+                            this.message = response.data.name
+                            this.form.reset()
+                            this.notice = false
+                            this.$refs.theModal.close()
+                        });
             }
+        },
+        components: {
+            modal
         }
     }
 </script>
