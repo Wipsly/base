@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 211);
+/******/ 	return __webpack_require__(__webpack_require__.s = 212);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -25102,7 +25102,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this = this;
 
-        axios.post('/api/user').then(function (response) {
+        axios.get('/api/getAuthUser').then(function (response) {
             _this.form.name = response.data.name;
             _this.form.email = response.data.email;
         });
@@ -25113,6 +25113,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.form.post('/api/updateUserPersonal').then(function (response) {
                 return console.log(response.data);
             });
+        }
+    },
+    computed: {
+        filled: function filled() {
+            return this.form.name != null && this.form.email != null;
         }
     }
 };
@@ -25179,6 +25184,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return console.log(response.data);
             });
         }
+    },
+    computed: {
+        filled: function filled() {
+            return this.form.password != null && this.form.password_confirmation != null;
+        }
     }
 };
 
@@ -25188,8 +25198,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_bootstrap_modal__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_bootstrap_modal__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_bootstrap_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_bootstrap_modal__);
+//
 //
 //
 //
@@ -25262,30 +25273,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        createUser: function createUser() {
+        openTheModal: function openTheModal() {
+            this.$refs.theModal.open();
+        },
+        yes: function yes() {
             var _this = this;
 
+            this.$refs.theModal.close();
             this.form.post('/api/createUser').then(function (response) {
                 console.log(response.data);
                 _this.message = response.data.name;
                 _this.form.reset();
                 _this.notice = false;
+            }).catch(function (error) {
+                _this.$refs.theModal.close();
             });
         },
-        openTheModal: function openTheModal() {
-            this.$refs.theModal.open();
-        },
-        yes: function yes() {
-            var _this2 = this;
-
-            console.log('clicked yes');
-            this.form.post('/api/createUser').then(function (response) {
-                console.log(response.data);
-                _this2.message = response.data.name;
-                _this2.form.reset();
-                _this2.notice = false;
-                _this2.$refs.theModal.close();
-            });
+        no: function no() {
+            this.$refs.theModal.close();
+        }
+    },
+    computed: {
+        filled: function filled() {
+            return this.form.name != null && this.form.email != null;
         }
     },
     components: {
@@ -49050,11 +49060,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "theModal"
   }, [_c('div', {
     slot: "title"
-  }, [_vm._v("\n                Your title here\n            ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                Are your sure?\n            ")]), _vm._v(" "), _c('div', {
     slot: "body"
-  }, [_vm._v("\n                Your body here\n            ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                Your subscription will be increased by one.\n            ")]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('div', {
+    staticClass: "btn btn-danger",
+    on: {
+      "click": _vm.no
+    }
+  }, [_vm._v("No")]), _vm._v(" "), _c('div', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.yes
@@ -49175,7 +49190,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('button', {
     staticClass: "btn btn-primary",
     attrs: {
-      "disabled": _vm.form.busy,
+      "disabled": !_vm.filled || _vm.form.busy,
       "type": "submit"
     }
   }, [(_vm.form.busy) ? _c('i', {
@@ -49306,7 +49321,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('button', {
     staticClass: "btn btn-primary",
     attrs: {
-      "disabled": _vm.form.busy,
+      "disabled": !_vm.filled || _vm.form.busy,
       "type": "submit"
     }
   }, [(_vm.form.busy) ? _c('i', {
@@ -49463,7 +49478,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('button', {
     staticClass: "btn btn-primary",
     attrs: {
-      "disabled": _vm.form.busy,
+      "disabled": !_vm.filled || _vm.form.busy,
       "type": "submit"
     }
   }, [(_vm.form.busy) ? _c('i', {
@@ -54452,127 +54467,6 @@ exports.install = function (Vue, globalOptions, useVuex, customTemplate) {
 /* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(43);
-module.exports = __webpack_require__(44);
-
-
-/***/ }),
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */,
-/* 291 */,
-/* 292 */,
-/* 293 */,
-/* 294 */,
-/* 295 */,
-/* 296 */,
-/* 297 */,
-/* 298 */,
-/* 299 */,
-/* 300 */,
-/* 301 */,
-/* 302 */,
-/* 303 */,
-/* 304 */,
-/* 305 */,
-/* 306 */,
-/* 307 */,
-/* 308 */,
-/* 309 */,
-/* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */,
-/* 314 */,
-/* 315 */,
-/* 316 */,
-/* 317 */,
-/* 318 */,
-/* 319 */,
-/* 320 */,
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */,
-/* 325 */
-/***/ (function(module, exports, __webpack_require__) {
-
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory();
@@ -55186,6 +55080,14 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;
 //# sourceMappingURL=bootstrap-modal.js.map
+
+/***/ }),
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(43);
+module.exports = __webpack_require__(44);
+
 
 /***/ })
 /******/ ]);

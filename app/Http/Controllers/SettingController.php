@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 
 class SettingController extends Controller
 {
@@ -25,6 +23,7 @@ class SettingController extends Controller
             'name' => 'required|max:255',
             'email' => [
                 'required',
+                'email',
                 'max:255',
                 Rule::unique('users')->ignore($user->id),
             ],

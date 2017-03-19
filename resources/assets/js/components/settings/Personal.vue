@@ -26,7 +26,7 @@
                 <!-- Submit -->
                 <div class="form-group">
                     <div class="col-md-10 col-md-offset-2">
-                        <button :disabled="form.busy" type="submit" class="btn btn-primary">
+                        <button :disabled="!filled || form.busy" type="submit" class="btn btn-primary">
                             <i v-if="form.busy" class="fa fa-fw fa-spinner fa-spin"></i>
                             <i v-else class="fa fa-fw fa-refresh"></i>
                             Update
@@ -49,7 +49,7 @@
             }
         },
         mounted() {
-            axios.post('/api/user')
+            axios.get('/api/getAuthUser')
                     .then(response => {
                                 this.form.name = response.data.name
                                 this.form.email = response.data.email
@@ -60,6 +60,11 @@
             updateUserPersonal() {
                 this.form.post('/api/updateUserPersonal')
                         .then(response => console.log(response.data));
+            }
+        },
+        computed: {
+            filled() {
+                return this.form.name != null && this.form.email != null
             }
         }
     }

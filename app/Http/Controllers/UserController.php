@@ -4,9 +4,23 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    // Create new Controller Instance
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    // Get Authenticated User
+    public function getAuthUser() {
+        $user = Auth::user();
+
+        return $user;
+    }
+
     // Get All Users
     public function getAllUsers() {
         $users = User::all();
@@ -19,7 +33,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
-            'email' => 'required|max:255|unique:users,email'
+            'email' => 'required|email|max:255|unique:users,email'
         ]);
 
         $user = new User();

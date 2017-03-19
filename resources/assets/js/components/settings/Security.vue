@@ -25,7 +25,7 @@
                 <!-- Submit -->
                 <div class="form-group">                                    
                     <div class="col-md-10 col-md-offset-2">
-                        <button :disabled="form.busy" type="submit" class="btn btn-primary">
+                        <button :disabled="!filled || form.busy" type="submit" class="btn btn-primary">
                             <i v-if="form.busy" class="fa fa-fw fa-spinner fa-spin"></i>
                             <i v-else class="fa fa-fw fa-refresh"></i>
                             Update
@@ -51,6 +51,11 @@
             updateUserSecurity() {
                 this.form.post('/api/updateUserSecurity')
                         .then(response => console.log(response.data));
+            }
+        },
+        computed: {
+            filled() {
+                return this.form.password != null && this.form.password_confirmation != null
             }
         }
     }

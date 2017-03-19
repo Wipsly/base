@@ -5,12 +5,13 @@
             <!-- Modal -->
             <modal ref="theModal">
                 <div slot="title">
-                    Your title here
+                    Are your sure?
                 </div>
                 <div slot="body">
-                    Your body here
+                    Your subscription will be increased by one.
                 </div>
                 <div slot="footer">
+                    <div class="btn btn-danger" @click="no">No</div>
                     <div class="btn btn-primary" @click="yes">Yes</div>
                 </div>
             </modal>
@@ -43,7 +44,7 @@
                 <!-- Submit -->
                 <div class="form-group">
                     <div class="col-md-10 col-md-offset-2">
-                        <button :disabled="form.busy" type="submit" class="btn btn-primary">
+                        <button :disabled="!filled || form.busy" type="submit" class="btn btn-primary">
                             <i v-if="form.busy" class="fa fa-fw fa-spinner fa-spin"></i>
                             <i v-else class="fa fa-fw fa-plus"></i>
                             Create User
@@ -69,28 +70,29 @@
             }
         },
         methods: {
-            createUser() {
-                this.form.post('/api/createUser')
-                        .then(response => {
-                            console.log(response.data)
-                            this.message = response.data.name
-                            this.form.reset()
-                            this.notice = false
-                        });
-            },
             openTheModal() {
                 this.$refs.theModal.open()
             },
-            yes () {
-                console.log('clicked yes')
+            yes() {
+                this.$refs.theModal.close()
                 this.form.post('/api/createUser')
                         .then(response => {
                             console.log(response.data)
                             this.message = response.data.name
                             this.form.reset()
                             this.notice = false
+                        })
+                        .catch(error => {
                             this.$refs.theModal.close()
                         });
+            },
+            no() {
+                this.$refs.theModal.close()
+            }
+        },
+        computed: {
+            filled() {
+                return this.form.name != null && this.form.email != null
             }
         },
         components: {
