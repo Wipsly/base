@@ -26,6 +26,11 @@ const router = new VueRouter({
                     path: 'create',
                     name: 'users-create',
                     component: require('./components/users/UsersCreate.vue')
+                },
+                {
+                    path: ':id/edit',
+                    name: 'users-edit',
+                    component: require('./components/users/UsersEdit.vue')
                 }
             ]
         },

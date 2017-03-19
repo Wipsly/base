@@ -15,13 +15,18 @@
             return {
                 loaded: false,
                 users: null,
-                columns: ['name', 'email'],
+                columns: ['name', 'email', 'actions'],
                 options: {
                     highlightMatches: true,
                     texts: {
                         filter: 'Filter',
                         filterPlaceholder: 'Search',
                         limit: 'Records'
+                    },
+                    templates: {
+                        actions: function(h, row) {
+                            return <router-link to={{ name: 'users-edit', params: { id: row.id }}} class="btn btn-primary"><i class="fa fa-pencil"></i></router-link>
+                        }
                     }
                 }
             }

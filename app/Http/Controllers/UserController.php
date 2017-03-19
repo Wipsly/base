@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,35 @@ class UserController extends Controller
         $users = User::all();
 
         return $users;
+    }
+
+    // Get User
+    public function getUser($id) {
+        $user = User::findorFail($id);
+
+        return $user;
+    }
+
+    // Edit User
+    public function editUser($id, Request $request)
+    {
+        $user = User::findOrFail($id);
+
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($user->id),
+            ],
+        ]);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+
+        return $user;
     }
 
     // Create User
