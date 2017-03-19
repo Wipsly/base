@@ -2,6 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Overview</div>
         <div class="panel-body">
+            <div class="alert alert-info" v-if="deleted">User has been deleted.</div>
             <div id="users">
                 <v-client-table :data="users" :columns="columns" :options="options" v-if="loaded"></v-client-table>
             </div>
@@ -38,5 +39,13 @@
                         this.loaded = true
                     });
         },
+        computed: {
+            deleted() {
+                if (this.$route.params.deletedUser != null)
+                    return true
+                else
+                    return false
+            }
+        }
     }
 </script>

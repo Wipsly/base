@@ -35,6 +35,10 @@
                             <i v-else class="fa fa-fw fa-pencil"></i>
                             Edit User
                         </button>
+                        <!-- Delete User -->
+                        <div class="btn btn-danger" @click="deleteUser">
+                            <i class="fa fa-remove"></i> Delete User
+                        </div>
                     </div>
                 </div>
             </form>
@@ -69,6 +73,10 @@
                             this.message = response.data.name
                             this.notice = false
                         });
+            },
+            deleteUser() {
+                axios.post('/api/deleteUser/' + this.$route.params.id)
+                        .then(this.$router.push({ name: 'users-index', params: { deletedUser: 'Stefan' }}))
             }
         },
         computed: {
