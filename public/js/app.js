@@ -26007,7 +26007,6 @@ exports.default = {
         },
         yes: function yes() {
             axios.post('/api/deleteUser/' + this.$route.params.id).then(this.$router.push({ name: 'users-index' }));
-            this.$events.fire('userDeleted', this.form);
         },
         no: function no() {
             this.$refs.theModal.close();
@@ -26112,9 +26111,7 @@ exports.default = {
         var h = this.$createElement;
 
         return {
-            user: null,
             loaded: false,
-            users: null,
             columns: ['name', 'email', 'actions'],
             options: {
                 highlightMatches: true,
@@ -26144,11 +26141,7 @@ exports.default = {
     mounted: function mounted() {
         var _this = this;
 
-        this.$events.listen('userDeleted', function (form) {
-            console.log(form.name);
-            _this.user = form.name;
-        });
-
+        console.log(this.$route.params);
         axios.get('/api/getAllUsers').then(function (response) {
             _this.users = response.data;
             _this.loaded = true;
@@ -50371,7 +50364,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-body"
   }, [_c('div', {
     staticClass: "alert alert-info"
-  }, [_vm._v(" " + _vm._s(_vm.user))]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('div', {
     attrs: {
       "id": "users"
     }
@@ -55883,13 +55876,9 @@ exports.default = plugin;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-exports.default = {
-    deletedUser: {
-        name: null
-    }
-};
+exports.default = {};
 
 /***/ })
 /******/ ]);

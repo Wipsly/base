@@ -96,7 +96,6 @@
             yes() {
                 axios.post('/api/deleteUser/' + this.$route.params.id)
                         .then(this.$router.push({ name: 'users-index'}))
-                this.$events.fire('userDeleted', this.form)
             },
             no() {
                 this.$refs.theModal.close()

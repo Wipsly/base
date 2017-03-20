@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Overview</div>
         <div class="panel-body">
-            <div class="alert alert-info"> {{ user }}</div>
+            <div class="alert alert-info"></div>
             <div id="users">
                 <v-client-table :data="users" :columns="columns" :options="options" v-if="loaded"></v-client-table>
             </div>
@@ -14,9 +14,7 @@
     export default {
         data () {
             return {
-                user: null,
                 loaded: false,
-                users: null,
                 columns: ['name', 'email', 'actions'],
                 options: {
                     highlightMatches: true,
@@ -34,11 +32,7 @@
             }
         },
         mounted() {
-            this.$events.listen('userDeleted', form => {
-                console.log(form.name)
-                this.user = form.name
-            })
-
+            console.log(this.$route.params)
             axios.get('/api/getAllUsers')
                     .then(response => {
                         this.users = response.data
