@@ -2,6 +2,20 @@
     <div class="panel panel-default">
         <div class="panel-heading">Edit User</div>
         <div class="panel-body">
+            <!-- Modal -->
+            <modal ref="theModal">
+                <div slot="title">
+                    Are your sure?
+                </div>
+                <div slot="body">
+                    {{ this.form.name }} will be deleted.
+                </div>
+                <div slot="footer">
+                    <div class="btn btn-danger" @click="no">No</div>
+                    <div class="btn btn-primary" @click="yes">Yes</div>
+                </div>
+            </modal>
+            <!-- Notice -->
             <div class="alert alert-dismissible alert-info" v-if="notice">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>Heads up!</strong> This alert needs your attention</a>, but it's not super important.
@@ -36,7 +50,7 @@
                             Edit User
                         </button>
                         <!-- Delete User -->
-                        <div class="btn btn-danger" @click="deleteUser">
+                        <div class="btn btn-danger" @click="openTheModal">
                             <i class="fa fa-remove"></i> Delete User
                         </div>
                     </div>
@@ -47,6 +61,7 @@
 </template>
 
 <script>
+    import modal from 'vue2-bootstrap-modal'
     export default {
         data() {
             return {
@@ -74,15 +89,24 @@
                             this.notice = false
                         });
             },
-            deleteUser() {
+            openTheModal() {
+                this.$refs.theModal.open()
+            },
+            yes() {
                 axios.post('/api/deleteUser/' + this.$route.params.id)
                         .then(this.$router.push({ name: 'users-index', params: { deletedUser: 'Stefan' }}))
+            },
+            no() {
+                this.$refs.theModal.close()
             }
         },
         computed: {
             filled() {
                 return this.form.name != null && this.form.email != null
             }
+        },
+        components: {
+            modal
         }
     }
 </script>
