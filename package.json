@@ -21,7 +21,9 @@
     "babel-plugin-transform-vue-jsx": "^3.4.2",
     "font-awesome": "^4.7.0",
     "vform": "^0.7.3",
+    "vue-events": "^3.0.1",
     "vue-router": "^2.3.0",
+    "vue-stash": "^2.0.1-beta",
     "vue2-bootstrap-modal": "^0.1.6"
   }
 }
