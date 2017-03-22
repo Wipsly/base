@@ -59,7 +59,9 @@
         methods: {
             updateUserPersonal() {
                 this.form.post('/api/updateUserPersonal')
-                        .then(response => console.log(response.data));
+                        .then(
+                                this.$events.fire('updatedUserPersonal', this.form)
+                        )
             }
         },
         computed: {

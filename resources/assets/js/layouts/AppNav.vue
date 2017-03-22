@@ -67,6 +67,9 @@
 <script>
     export default {
         mounted () {
+            this.$events.listen('updatedUserPersonal', form => (
+                    this.$store.user.name = form)
+            );
             if (!this.$store.authUser.name)
                 axios.get('/api/getAuthUser')
                         .then(response => {

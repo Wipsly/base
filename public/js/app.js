@@ -25751,9 +25751,7 @@ exports.default = {
 
     methods: {
         updateUserPersonal: function updateUserPersonal() {
-            this.form.post('/api/updateUserPersonal').then(function (response) {
-                return console.log(response.data);
-            });
+            this.form.post('/api/updateUserPersonal').then(this.$events.fire('updatedUserPersonal', this.form));
         }
     },
     computed: {
@@ -55995,6 +55993,9 @@ exports.default = {
     mounted: function mounted() {
         var _this = this;
 
+        this.$events.listen('updatedUserPersonal', function (form) {
+            return _this.$store.user.name = form;
+        });
         if (!this.$store.authUser.name) axios.get('/api/getAuthUser').then(function (response) {
             _this.$store.authUser.id = response.data.id;
             _this.$store.authUser.name = response.data.name;
