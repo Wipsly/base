@@ -24,7 +24,7 @@ class UserController extends Controller
 
     // Get All Users
     public function getAllUsers() {
-        $users = User::all();
+        $users = User::with('roles')->get();
 
         return $users;
     }

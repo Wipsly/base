@@ -18,7 +18,7 @@
         data () {
             return {
                 loaded: false,
-                columns: ['name', 'email', 'actions'],
+                columns: ['name', 'email', 'actions', 'roles'],
                 options: {
                     highlightMatches: true,
                     texts: {
