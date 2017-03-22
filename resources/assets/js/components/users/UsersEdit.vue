@@ -86,9 +86,9 @@
             editUser() {
                 this.form.post('/api/editUser/' + this.$route.params.id)
                         .then(response => {
-                            console.log(response.data)
                             this.message = response.data.name
                             this.notice = false
+                            this.$events.fire('updatedUserPersonal', this.form.name)
                         });
             },
             openTheModal() {

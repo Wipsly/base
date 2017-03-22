@@ -60,7 +60,7 @@
             updateUserPersonal() {
                 this.form.post('/api/updateUserPersonal')
                         .then(
-                                this.$events.fire('updatedUserPersonal', this.form)
+                                this.$events.fire('updatedUserPersonal', this.form.name)
                         )
             }
         },
