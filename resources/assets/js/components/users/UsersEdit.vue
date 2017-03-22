@@ -71,7 +71,6 @@
                 }),
                 message: null,
                 notice: true,
-                userDeleted: null,
             }
         },
         mounted() {
@@ -95,7 +94,7 @@
             },
             yes() {
                 axios.post('/api/deleteUser/' + this.$route.params.id)
-                        .then(this.$router.push({ name: 'users-index'}))
+                        .then(this.$router.push({ name: 'users-index',  params: { deletedUser: this.form.name }}))
             },
             no() {
                 this.$refs.theModal.close()

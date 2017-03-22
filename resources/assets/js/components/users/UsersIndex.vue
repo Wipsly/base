@@ -2,7 +2,10 @@
     <div class="panel panel-default">
         <div class="panel-heading">Overview</div>
         <div class="panel-body">
-            <div class="alert alert-info"></div>
+            <div class="alert alert-info alert-dismissible" role="alert" v-if="deletedUser">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               {{ this.$route.params.deletedUser }} has been deleted.
+            </div>
             <div id="users">
                 <v-client-table :data="users" :columns="columns" :options="options" v-if="loaded"></v-client-table>
             </div>
@@ -38,6 +41,13 @@
                         this.users = response.data
                         this.loaded = true
                     });
+        },
+        computed: {
+            deletedUser() {
+                if (this.$route.params.deletedUser) {
+                    return true
+                }
+            }
         }
     }
 </script>
