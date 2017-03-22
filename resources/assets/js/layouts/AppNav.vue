@@ -44,7 +44,7 @@
                  
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Dominik Geimer <span class="caret"></span>
+                            {{ $store.authUser.name }} <span class="caret"></span>
                         </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
@@ -63,3 +63,17 @@
             </div>
         </nav>
 </template>
+
+<script>
+    export default {
+        mounted () {
+            if (!this.$store.authUser.name)
+                axios.get('/api/getAuthUser')
+                        .then(response => {
+                            this.$store.authUser.id = response.data.id
+                            this.$store.authUser.name = response.data.name
+                            console.log(response.data.name)
+                        });
+            }
+    }
+</script>

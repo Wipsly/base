@@ -25979,7 +25979,8 @@ exports.default = {
                 email: null
             }),
             message: null,
-            notice: true
+            notice: true,
+            authUser: null
         };
     },
     mounted: function mounted() {
@@ -25988,6 +25989,7 @@ exports.default = {
         axios.get('/api/getUser/' + this.$route.params.id).then(function (response) {
             _this.form.name = response.data.name;
             _this.form.email = response.data.email;
+            _this.authUser = _this.$store.authUser.name;
         });
     },
 
@@ -26014,6 +26016,9 @@ exports.default = {
     computed: {
         filled: function filled() {
             return this.form.name != null && this.form.email != null;
+        },
+        canNotDeleteAuthUser: function canNotDeleteAuthUser() {
+            return this.$route.params.id == this.$store.authUser.id;
         }
     },
     components: {
@@ -26293,9 +26298,14 @@ exports.default = router;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-exports.default = {};
+exports.default = {
+    authUser: {
+        id: null,
+        name: null
+    }
+};
 
 /***/ }),
 /* 78 */
@@ -49899,7 +49909,7 @@ module.exports = Component.exports
 
 var Component = __webpack_require__(2)(
   /* script */
-  null,
+  __webpack_require__(333),
   /* template */
   __webpack_require__(131),
   /* scopeId */
@@ -50205,14 +50215,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-fw fa-spinner fa-spin"
   }) : _c('i', {
     staticClass: "fa fa-fw fa-pencil"
-  }), _vm._v("\n                        Edit User\n                    ")]), _vm._v(" "), _c('div', {
+  }), _vm._v("\n                        Edit User\n                    ")]), _vm._v(" "), (!_vm.canNotDeleteAuthUser) ? _c('div', {
     staticClass: "btn btn-danger",
     on: {
       "click": _vm.openTheModal
     }
   }, [_c('i', {
     staticClass: "fa fa-remove"
-  }), _vm._v(" Delete User\n                    ")])])])], 1)], 1)])
+  }), _vm._v(" Delete User\n                    ")]) : _vm._e()])])], 1)], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -50728,7 +50738,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "nav navbar-nav navbar-right"
   }, [_c('li', {
     staticClass: "dropdown"
-  }, [_vm._m(2), _vm._v(" "), _c('ul', {
+  }, [_c('a', {
+    staticClass: "dropdown-toggle",
+    attrs: {
+      "href": "#",
+      "data-toggle": "dropdown",
+      "role": "button",
+      "aria-expanded": "false"
+    }
+  }, [_vm._v("\n                        " + _vm._s(_vm.$store.authUser.name) + " "), _c('span', {
+    staticClass: "caret"
+  })]), _vm._v(" "), _c('ul', {
     staticClass: "dropdown-menu",
     attrs: {
       "role": "menu"
@@ -50743,7 +50763,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-fw fa-btn fa-cogs"
   }), _vm._v(" Settings\n                                ")])], 1), _vm._v(" "), _c('li', {
     staticClass: "divider"
-  }), _vm._v(" "), _vm._m(3)])])])])])])
+  }), _vm._v(" "), _vm._m(2)])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "navbar-header"
@@ -50802,18 +50822,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('i', {
     staticClass: "glyphicon glyphicon-search"
   })])])])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "dropdown-toggle",
-    attrs: {
-      "href": "#",
-      "data-toggle": "dropdown",
-      "role": "button",
-      "aria-expanded": "false"
-    }
-  }, [_vm._v("\n                        Dominik Geimer "), _c('span', {
-    staticClass: "caret"
-  })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('a', {
     attrs: {
@@ -55792,6 +55800,208 @@ exports.install = function (Vue, globalOptions, useVuex, customTemplate) {
 __webpack_require__(44);
 module.exports = __webpack_require__(45);
 
+
+/***/ }),
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    mounted: function mounted() {
+        var _this = this;
+
+        if (!this.$store.authUser.name) axios.get('/api/getAuthUser').then(function (response) {
+            _this.$store.authUser.id = response.data.id;
+            _this.$store.authUser.name = response.data.name;
+            console.log(response.data.name);
+        });
+    }
+};
 
 /***/ })
 /******/ ]);

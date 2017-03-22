@@ -50,7 +50,7 @@
                             Edit User
                         </button>
                         <!-- Delete User -->
-                        <div class="btn btn-danger" @click="openTheModal">
+                        <div class="btn btn-danger" @click="openTheModal" v-if="!canNotDeleteAuthUser">
                             <i class="fa fa-remove"></i> Delete User
                         </div>
                     </div>
@@ -71,6 +71,7 @@
                 }),
                 message: null,
                 notice: true,
+                authUser: null
             }
         },
         mounted() {
@@ -78,6 +79,7 @@
                     .then(response => {
                         this.form.name = response.data.name
                         this.form.email = response.data.email
+                        this.authUser = this.$store.authUser.name
                     });
         },
         methods: {
@@ -103,6 +105,9 @@
         computed: {
             filled() {
                 return this.form.name != null && this.form.email != null
+            },
+            canNotDeleteAuthUser() {
+                return this.$route.params.id == this.$store.authUser.id
             }
         },
         components: {
